@@ -1,0 +1,17 @@
+button {
+	width: 100%;
+}
+
+.progress {
+	margin: 20px;
+	width: 100%;
+	transition: all 1s ease-in-out;
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+}
+
+.item-details {
+	padding: 5px;
+	margin: 5px;
+	width: 250px;
+}
