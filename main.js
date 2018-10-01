@@ -84,7 +84,40 @@ function callDisplayTopic(topic) {
   }
 }
 
-function displayFilms() {}
+function displayFilms() {
+  //Figure out how many columns of data will fit on the page
+  const numColumns = Math.floor(window.innerWidth / 260);
+    
+  //Add bootstrap cards for each result item to its repsective column
+  let filmsHtml = {};
+  films.forEach((film, i) => {
+    console.log("film: " + JSON.stringify(film));
+    const colIndex = i % numColumns;
+    if (filmsHtml[colIndex] === undefined) {
+      filmsHtml[colIndex] = '';
+    }
+    filmsHtml[colIndex] += `
+      <div class=" flex-shrink-0 card bg-dark text-warning item-details">
+        <img class="card-image"/>
+        <button class="btn btn-dark text-warning" type="button" data-toggle="collapse" data-target="#film-${i}" aria-expanded="false" aria-controls="film-${i}">${film.title}</button>
+        <div class="collapse card-content" id="film-${i}">
+          <ul>
+            <li><strong>Director: </strong>${film.director}</li>
+            <li><strong>Producer: </strong>${film.producer}</li>
+            <li><strong>Release Date: </strong>${film.release_date}</li>
+          </ul>
+        </div>
+      </div>
+    `;
+  });
+
+  //Wrap each column with flex-column
+  let finalHtml = '';
+  Object.keys(filmsHtml).forEach(key => {
+    finalHtml += `<div class="d-flex flex-column">${filmsHtml[key]}</div>`;
+  });
+  $('#films-container').html(finalHtml);
+}
 
 function displayPeople() {
   //Figure out how many columns of data will fit on the page
